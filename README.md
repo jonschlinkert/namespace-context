@@ -1,6 +1,6 @@
 # namespace-context [![NPM version](https://badge.fury.io/js/namespace-context.svg)](http://badge.fury.io/js/namespace-context)
 
-> Mixin/utility for Assemble, Verb, or Template that makes it easy to add namespaced variables to the context, like `page` or `post`. This allows you to use `{{page.title}}` instead of `{{title}}` to get the current page's title. Can be used with verb, assemble v0.6.0, or any application based on jonschlinkert/template.
+> Use with Assemble, Verb, or Templates.js to easily add namespaced variables like `page` or `post` to the context. This allows you to use `{{page.title}}` instead of `{{title}}` to get the current page's title. Can be used with verb, assemble v0.6.0, or any application based on Templates.js.
 
 ## Install
 
