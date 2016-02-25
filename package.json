@@ -1,7 +1,7 @@
 {
   "name": "namespace-context",
   "description": "Use with Assemble, Verb, or Templates.js to easily add namespaced variables like `page` or `post` to the context. This allows you to use `{{page.title}}` instead of `{{title}}` to get the current page's title. Can be used with verb, assemble v0.6.0, or any application based on Templates.js.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/jonschlinkert/namespace-context",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/namespace-context",
@@ -20,22 +20,30 @@
     "test": "mocha"
   },
   "dependencies": {
-    "clone-deep": "^0.2.2",
-    "is-buffer": "^1.0.2"
+    "mixin-deep": "^1.1.3"
   },
   "devDependencies": {
-    "async": "^1.4.2",
-    "engine-handlebars": "^0.6.1",
-    "mixin-deep": "^1.1.3",
+    "async": "^1.5.2",
+    "engine-handlebars": "^0.8.0",
+    "gulp-format-md": "^0.1.7",
     "mocha": "*",
-    "should": "*",
-    "templates": "^0.1.8"
+    "parser-front-matter": "^1.3.0",
+    "templates": "^0.14.3"
   },
   "keywords": [
     "expand",
     "process"
   ],
   "verb": {
+    "run": true,
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
     "related": {
       "list": [
         "assemble",
@@ -43,6 +51,14 @@
         "template",
         "expand"
       ]
+    },
+    "reflinks": [
+      "verb",
+      "assemble",
+      "templates"
+    ],
+    "lint": {
+      "reflinks": true
     }
   }
 }
