@@ -7,36 +7,27 @@
 
 'use strict';
 
-var isBuffer = require('is-buffer');
-var clone = require('clone-deep');
+var merge = require('mixin-deep');
 
-module.exports = function (app, namespace, customFn) {
+module.exports = function(namespace, contextFn) {
   if (typeof namespace === 'function') {
-    customFn = namespace;
+    contextFn = namespace;
     namespace = null;
   }
 
-  // use custom function from args, or `app.context`, or noop
-  var fn =  customFn || app.context || identity;
+  return function plugin(view) {
+    if (!this.isView && !this.isItem) return plugin;
 
-  // replace the built-in context method
-  app.context = function (view/*, context, locals*/) {
-    var opts = view.options || {};
+    var opts = this.options || {};
     var name = namespace || opts.inflection || 'page';
+    var fn = contextFn || this.context;
 
-    var ctx = fn.apply(app, arguments) || {};
-    ctx[name] = clone(ctx, function (value) {
-      if (isBuffer(value)) return value.slice();
+    this.define('context', function(locals) {
+      var ctx = fn.apply(this, arguments) || {};
+      ctx[name] = merge({}, ctx, this.data);
+      return ctx;
     });
-    return ctx;
+
+    return plugin;
   };
-  return app;
 };
-
-/**
- * Return the value passed to the function
- */
-
-function identity(data) {
-  return data;
-}
